@@ -1,0 +1,124 @@
+This package contains functions for computing signal projections into the
+bounded row / column degree model. 
+
+================================================================================
+
+Table of contents:
+
+1. Installation
+2. Background
+3. Usage
+4. Contact
+5. License
+
+
+================================================================================
+
+1. Installation
+
+1.1 Matlab module
+
+Compile the mex file with
+
+  make mexfile
+
+which will produce a file degree_flow.<mex-extension>, where <mex-extension> is
+the mex file name extension of your system.
+
+Currently the only dependency is mex, the Matlab module compiler, which needs to
+be installed on your system. Note that mex requires g++ on UNIX systems.
+
+The makefile assumes that mex is available on the command line as mex. If this
+is not the case on your system, you can override the path to the mex compiler:
+
+  make MEX='/path/to/mex' mexfile
+
+
+1.2 Command-line program
+
+The package also contains a command-line program for testing purposes. You can
+compile it with
+
+  make degree_flow
+
+Note that the degree_flow binary depends on the boost library (in particular,
+the program options library).
+
+
+1.3 Unit tests
+
+You can build and execute the unit tests for the main degree_flow routine with
+
+  make run_degree_flow_test
+
+The unit tests are mainly for development purposes. In order to run the unit
+tests, you need the boost library (headers only is sufficient) and the Google
+C++ test framework googletest, which you can get from:
+
+  http://code.google.com/p/googletest/
+
+On Ubuntu / Debian, you can install googletest via the libgtest-dev package.
+In that case, the makefile should find you googletest installation. Otherwise,
+you can specify the path to your local googletest installation with
+
+  make GTESTDIR='/path/to/googletest' run_degree_flow_test
+
+
+================================================================================
+
+2. Background
+
+TBD
+
+================================================================================
+
+
+3. Usage
+
+3.1 Matlab module
+
+The name of the function is degree_flow. It requires at least three parameters:
+
+- X, a 2D-matrix containing the signal amplitudes.
+  Note that the algorithm works with the absolute values of X directly
+  without squaring the amplitudes first. So if you want to get an
+  l2-guarantee, pass X.^2 into degree_flow.
+
+- k, the total sparsity of the resulting projection.
+
+- col_degrees, the sparsity of each column in the projection.
+  col_degree should be a row vector with as many entries as X has columns.
+
+- row_degrees, the sparsity of each row in the projection.
+  row_degree should be a row vector with as many entries as X has rows.
+
+Moreover, degree_flow accepts an optional fourth parameter opts, which can
+specify a number of additional options:
+
+- opts.verbose, a boolean flag that indicates whether degree_flow shoud provide
+  verbose output. Default: false.
+
+After a successful run of degree_flow, the algorithm returns the following
+values:
+
+[support]
+
+- support is a 2D-matrix with the same dimensions as the input parameter X.
+  Each entry in support is either 0 or 1, indicating whether the corresponding
+  entry of X is part of the support or not.
+
+
+================================================================================
+
+4. Contact
+
+For questions, comments, etc. about this package, contact Ludwig Schmidt 
+(ludwigschmidt2@gmail.com).
+
+
+================================================================================
+
+5. License
+
+This package is licensed under the MIT license. See the file LICENSE for
+details.

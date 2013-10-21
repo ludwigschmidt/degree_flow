@@ -1,0 +1,11 @@
+*.swp
+*.swo
+*.swm
+*.swn
+.deps
+obj
+degree_flow
+degree_flow_test
+degree_flow.mexa64
+degree_flow.mexmaci64
+degree_flow.tar.gz
