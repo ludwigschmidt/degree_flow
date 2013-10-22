@@ -41,9 +41,6 @@ compile it with
 
   make degree_flow
 
-Note that the degree_flow binary depends on the boost library (in particular,
-the program options library).
-
 
 1.3 Unit tests
 
@@ -86,11 +83,11 @@ The name of the function is degree_flow. It requires at least three parameters:
 
 - k, the total sparsity of the resulting projection.
 
-- col_degrees, the sparsity of each column in the projection.
-  col_degree should be a row vector with as many entries as X has columns.
-
 - row_degrees, the sparsity of each row in the projection.
   row_degree should be a row vector with as many entries as X has rows.
+
+- col_degrees, the sparsity of each column in the projection.
+  col_degree should be a row vector with as many entries as X has columns.
 
 Moreover, degree_flow accepts an optional fourth parameter opts, which can
 specify a number of additional options:
