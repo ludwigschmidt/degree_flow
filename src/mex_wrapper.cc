@@ -65,7 +65,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     set<string> known_options;
     known_options.insert("verbose");
     vector<string> options;
-    if (!get_fields(prhs[3], &options)) {
+    if (!get_fields(prhs[4], &options)) {
       mexErrMsgTxt("Cannot get fields from options argument.");
     }
     for (size_t ii = 0; ii < options.size(); ++ii) {
@@ -77,8 +77,8 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
       }
     }
 
-    if (has_field(prhs[3], "verbose")
-        && !get_bool_field(prhs[3], "verbose", &verbose)) {
+    if (has_field(prhs[4], "verbose")
+        && !get_bool_field(prhs[4], "verbose", &verbose)) {
       mexErrMsgTxt("verbose flag has to be a boolean scalar.");
     }
   }
