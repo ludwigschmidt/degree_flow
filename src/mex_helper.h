@@ -68,10 +68,27 @@ bool get_double_row_vector(const mxArray* raw_data,
   return true;
 }
 
+bool get_double_row_vector_as_ints(const mxArray* raw_data,
+    std::vector<int>* data) {
+  std::vector<double> tmp;
+  if (!get_double_row_vector(raw_data, &tmp)) {
+    return false;
+  }
+  if (data->size() != tmp.size()) {
+    data->resize(tmp.size());
+  }
+  for (size_t ii = 0; ii < tmp.size(); ++ii) {
+    (*data)[ii] = static_cast<int>(round(tmp[ii]));
+  }
+  return true;
+}
+
 bool get_double_interval_as_ints(const mxArray* raw_data, int* left,
     int* right) {
   std::vector<double> tmp;
-  get_double_row_vector(raw_data, &tmp);
+  if (!get_double_row_vector(raw_data, &tmp)) {
+    return false;
+  }
   if (tmp.size() != 2) {
     return false;
   }

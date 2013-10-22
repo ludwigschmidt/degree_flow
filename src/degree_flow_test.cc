@@ -225,6 +225,24 @@ TEST(DegreeFlowTest, LargeOneElementSelection) {
   run_degree_flow(x, k, row_degrees, col_degrees, result);
 }
 
+TEST(DegreeFlowTest, NonSquare) {
+  vector<vector<double> > x;
+  x.push_back(list_of(1)(3)(8)(4));
+  x.push_back(list_of(7)(1)(10)(8));
+  x.push_back(list_of(3)(2)(5)(0));
+
+  int k = 2;
+  vector<int> row_degrees = list_of(1)(0)(1);
+  vector<int> col_degrees = list_of(1)(1)(1)(1);
+
+  vector<vector<bool> > result;
+  result.push_back(list_of(0)(0)(1)(0));
+  result.push_back(list_of(0)(0)(0)(0));
+  result.push_back(list_of(1)(0)(0)(0));
+
+  run_degree_flow(x, k, row_degrees, col_degrees, result);
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
